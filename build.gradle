@@ -1,0 +1,39 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+group = 'com.github.simpletokenbucket'
+version = '1.0.0-SNAPSHOT'
+project.archivesBaseName = rootProject.name
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation 'org.mockito:mockito-core:4.5.1'
+    testImplementation "org.mockito:junit-jupiter:2.20.0"
+    testImplementation "org.hamcrest:java-hamcrest:2.0.0.0"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
+
